@@ -9,4 +9,7 @@
     <item
         android:id="@+id/mitemShow"
         android:title="@string/mitem_show_results" />
+    <item
+        android:id="@+id/mitemChallenge"
+        android:title="@string/challenge_mode" />
 </menu>

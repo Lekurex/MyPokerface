@@ -8,4 +8,5 @@
     <string name="mitem_save_results">Save Results</string>
     <string name="mitem_show_results">Show Results</string>
     <string name="mitem_load_results">Load Results</string>
+    <string name="challenge_mode">Challenge Mode</string>
 </resources>
