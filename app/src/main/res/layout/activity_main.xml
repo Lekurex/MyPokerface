@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pkgActivity.MainActivity">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/button1stdicing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/Button1st_dicing"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/buttonNewGame" />
+    <Button
+        android:id="@+id/button2nddicing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Button2t_dicing"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/button1stdicing" />
+
+    <Button
+        android:id="@+id/button3rddicing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Button3st_dicing"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/button2nddicing" />
+
+    <Button
+        android:id="@+id/buttonNewGame"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ButtonNew_game"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineCenter" />
+
+
+
+
+    <ImageView
+        android:id="@+id/ImageViewDice1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="Dice1"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ImageViewDice2"
+        app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
+        app:layout_constraintHorizontal_weight="1"
+        app:srcCompat="@drawable/dice0" />
+
+    <ImageView
+        android:id="@+id/ImageViewDice2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="Dice2"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ImageViewDice3"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewDice1"
+        app:layout_constraintHorizontal_weight="1"
+        app:srcCompat="@drawable/dice0" />
+
+    <ImageView
+        android:id="@+id/ImageViewDice3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="Dice3"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ImageViewDice4"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewDice2"
+        app:layout_constraintHorizontal_weight="1"
+        app:srcCompat="@drawable/dice0" />
+
+    <ImageView
+        android:id="@+id/ImageViewDice4"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="Dice4"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenter"
+        app:layout_constraintEnd_toStartOf="@+id/ImageViewDice5"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewDice3"
+        app:layout_constraintHorizontal_weight="1"
+        app:srcCompat="@drawable/dice0" />
+
+    <ImageView
+        android:id="@+id/ImageViewDice5"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:contentDescription="Dice5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenter"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toEndOf="@+id/ImageViewDice4"
+        app:layout_constraintHorizontal_weight="1"
+        app:srcCompat="@drawable/dice0" />
+
+    <ListView
+        android:id="@+id/listViewGames"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="#EFE982"
+        app:layout_constraintBottom_toTopOf="@+id/ImageViewDice3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

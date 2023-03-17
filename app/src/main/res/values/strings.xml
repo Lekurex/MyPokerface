@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Pokerface</string>
+    <string name="Button1st_dicing">1st dicing</string>
+    <string name="message">do dicing</string>
+    <string name="Button2t_dicing">2nd dicing</string>
+    <string name="Button3st_dicing">3rd dicing</string>
+    <string name="ButtonNew_game">New Game</string>
+    <string name="mitem_save_results">Save Results</string>
+    <string name="mitem_show_results">Show Results</string>
+    <string name="mitem_load_results">Load Results</string>
+</resources>
