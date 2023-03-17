@@ -13,6 +13,10 @@
         android:theme="@style/Theme.MyPokerface"
         tools:targetApi="31">
         <activity
+            android:name=".pkgActivity.ChallengeActivity"
+            android:exported="false"
+            android:label="My PokerfaceV7 Challenge"/>
+        <activity
             android:name=".pkgActivity.ResultActivity"
             android:exported="false"
             android:label="My PokerfaceV2 Results"/>

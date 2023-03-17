@@ -124,7 +124,7 @@
         app:srcCompat="@drawable/dice0" />
 
     <ListView
-        android:id="@+id/listViewGames"
+        android:id="@+id/listViewChallengeGames"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
