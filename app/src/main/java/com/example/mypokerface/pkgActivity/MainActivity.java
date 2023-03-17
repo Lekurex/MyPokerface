@@ -343,6 +343,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(this, ResultActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.mitemChallenge:
+                        Intent intentChallenge = new Intent(this, ChallengeActivity.class);
+                        startActivity(intentChallenge);
             }
         } catch(Exception ex){
             Toast.makeText(this, "error:" + ex.getMessage(), Toast.LENGTH_LONG).show();
