@@ -24,6 +24,8 @@ public class Database {
     private static Database db = null;
     private ArrayList<Dice> collDices = new ArrayList<>();
     private ArrayList<Game> collGames = new ArrayList<>();
+    private ArrayList<Challenge> collChallenge = new ArrayList<>();
+
 
     private Game currGame;
 
@@ -150,6 +152,23 @@ public class Database {
         fis.close();
     }
 
+    public void insertChallenges () {
+        collChallenge.add(new Challenge(3, 20, "score 20 points in 3 games","easy"));
+        collChallenge.add(new Challenge(3, 30, "score 30 points in 3 games","middle"));
+        collChallenge.add(new Challenge(3, 40, "score 40 points in 3 games","hard"));
+        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy"));
+        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle"));
+        collChallenge.add(new Challenge(2, 35, "score 35 points in 2 games","hard"));
+        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy"));
+        collChallenge.add(new Challenge(2, 25, "score 20 points in 3 games","middle"));
+        collChallenge.add(new Challenge(1, 20, "score 20 points in 3 games","hard"));
+        collChallenge.add(new Challenge(5, 80, "score 60 points in 3 games","super hard"));
+        collChallenge.add(new Challenge(6, 100, "score 20 points in 3 games","super hard"));
+    }
+
+    public ArrayList<Challenge> getCollChallenge () {
+        return collChallenge;
+    }
 
 
 }

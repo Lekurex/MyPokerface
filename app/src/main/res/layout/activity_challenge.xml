@@ -138,19 +138,18 @@
         android:id="@+id/textViewMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="CHALLENGE MODE"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="CHALLENGE difficulty:"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalPoints"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalPoints"
+        app:layout_constraintBottom_toTopOf="@+id/textViewInfo"/>
 
     <TextView
         android:id="@+id/textViewPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="available points: "
+        android:text="current points: "
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
@@ -161,10 +160,20 @@
         android:id="@+id/textViewTotalPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="your total Points:"
+        android:text="your total Challlenge-Points:"
         app:layout_constraintBottom_toTopOf="@+id/textViewMode"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/textViewPoints" />
+
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Challenge-Info:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

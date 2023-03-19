@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.mypokerface.R;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mypokerface.pkgData.Challenge;
 import com.example.mypokerface.pkgData.Database;
 import com.example.mypokerface.pkgData.Dice;
 import com.example.mypokerface.pkgData.Game;
@@ -25,8 +26,10 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
     private Database db = null;
     private ListView listViewChallenge;
     private TextView txtViewTotalPoints;
+    private TextView txtViewInfo;
     private TextView txtViewPoints;
     private TextView txtViewMode;
+    private static String newline = System.getProperty("line.separator");
 
 
     private ArrayAdapter<String> adapterChallengeGame;
@@ -40,6 +43,10 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
     private Button btn2ndDicing;
     private Button btn3rdDicing;
     private Button btnNewGame;
+    private ArrayList<Challenge> collChallenges;
+    private Challenge currChallenge;
+    private int totalPoints = 0;
+    private int challengeRounds = 0;
 
     private static int cntGame = 1;
     private boolean resetListView = false;
@@ -53,6 +60,21 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
         getAllViews();
         registrateEventHandlers();
         initOtherThings();
+        db.insertChallenges();
+        collChallenges = db.getCollChallenge();
+        getCurrentChallenge();
+
+    }
+
+    private void getCurrentChallenge() {
+        int  idx = (int) (Math.random() * ((collChallenges.size() - 1) - 0));
+        currChallenge = collChallenges.get(idx);
+
+        txtViewMode.setText("CHALLENGE difficulty: "+currChallenge.getDifficulty());
+        txtViewInfo.setText("Challenge-Info: "+currChallenge.getChallengInfo());
+        totalPoints = 0;
+        txtViewPoints.setText("current total points: "+totalPoints);
+        challengeRounds = currChallenge.getRounds();
     }
 
 
@@ -81,7 +103,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
         listViewChallenge = (ListView) findViewById(R.id.listViewChallengeGames);
         txtViewMode = (TextView) findViewById(R.id.textViewMode);
         txtViewPoints = (TextView) findViewById(R.id.textViewPoints);
-        txtViewPoints = (TextView) findViewById(R.id.textViewTotalPoints);
+        txtViewInfo = (TextView) findViewById(R.id.textViewInfo);
+        txtViewTotalPoints = (TextView) findViewById(R.id.textViewTotalPoints);
 
 
     }
@@ -98,6 +121,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
             adapterChallengeGame = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
             listViewChallenge.setAdapter(adapterChallengeGame);
             setClickable(false);
+
         }catch (Exception ex) {
             toast = Toast.makeText(this, "error" + ex.getMessage(), Toast.LENGTH_LONG);
             toast.show();
@@ -133,8 +157,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                     db.doDicing();
                     repaintDices();
                     btn1stDicing.setEnabled(false);
-                    toast = Toast.makeText(this, "1. dicing done", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "1. dicing done", Toast.LENGTH_LONG);
+                    //toast.show();
                     break;
 
                 case R.id.button2nddicing:
@@ -143,12 +167,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         db.doDicing();
                         repaintDices();
                         btn2ndDicing.setEnabled(false);
-                        toast = Toast.makeText(this, "2. dicing done", Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                    else{
-                        toast = Toast.makeText(this, "error: first dicing not done", Toast.LENGTH_LONG);
-                        toast.show();
+
                     }
 
                     break;
@@ -161,13 +180,14 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         btn3rdDicing.setEnabled(false);
                         Game game = Calculator.getResults(db.getCollDices());
                         adapterChallengeGame.add(game.toString());
-                        db.addGame(game);
-                        collGames.add(game);
-                        toast = Toast.makeText(this, "3. dicing done", Toast.LENGTH_LONG);
-                        toast.show();
+                        totalPoints += game.getPoints();
+                        redrawPoints();
                         cntGame++;
 
-                        if(cntGame == 10){
+                        if(cntGame == challengeRounds){
+                            //check ob challenge bestanden wurde
+                            //wenn ja dann die punkte in ein file dazu schreiben - davor file lesen und die vorherigen punkte bekommen
+                            //soll wieder ein random game gefunden werden
                             int points = 0;
                             ResultActivity.resetPoints();
                             for(Game tempGame : collGames){
@@ -184,14 +204,14 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                     else{
-                        toast = Toast.makeText(this, "error: first or second dicing not done", Toast.LENGTH_LONG);
-                        toast.show();
+                        // = Toast.makeText(this, "error: first or second dicing not done", Toast.LENGTH_LONG);
+                        //toast.show();
                     }
                     break;
 
                 case R.id.ImageViewDice1:
-                    toast = Toast.makeText(this, "1. dice selected", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "1. dice selected", Toast.LENGTH_LONG);
+                    //toast.show();
                     currDice = db.getNthDice(0);
                     if(currDice.isDicingAllowed()){
                         db.lockDie(currDice);
@@ -203,8 +223,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                     break;
 
                 case R.id.ImageViewDice2:
-                    toast = Toast.makeText(this, "2. dice selected", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "2. dice selected", Toast.LENGTH_LONG);
+                    //toast.show();
                     currDice = db.getNthDice(1);
                     if(currDice.isDicingAllowed()){
                         db.lockDie(currDice);
@@ -217,8 +237,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
 
 
                 case R.id.ImageViewDice3:
-                    toast = Toast.makeText(this, "3. dice selected", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "3. dice selected", Toast.LENGTH_LONG);
+                    //toast.show();
                     currDice = db.getNthDice(2);
                     if(currDice.isDicingAllowed()){
                         db.lockDie(currDice);
@@ -231,8 +251,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
 
 
                 case R.id.ImageViewDice4:
-                    toast = Toast.makeText(this, "4. dice selected", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "4. dice selected", Toast.LENGTH_LONG);
+                    //toast.show();
                     currDice = db.getNthDice(3);
                     if(currDice.isDicingAllowed()){
                         db.lockDie(currDice);
@@ -245,8 +265,8 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
 
 
                 case R.id.ImageViewDice5:
-                    toast = Toast.makeText(this, "5. dice selected", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "5. dice selected", Toast.LENGTH_LONG);
+                    //toast.show();
                     currDice = db.getNthDice(4);
                     if(currDice.isDicingAllowed()){
                         db.lockDie(currDice);
@@ -261,6 +281,10 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
             toast = Toast.makeText(this, "error" + ex.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    private void redrawPoints() {
+        txtViewPoints.setText("current total points: "+totalPoints);
     }
 
     private void setPaddings() {
