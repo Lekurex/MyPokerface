@@ -48,7 +48,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
     private int totalPoints = 0;
     private int challengeRounds = 0;
 
-    private static int cntGame = 1;
+    private static int cntGame = 0;
     private boolean resetListView = false;
 
     private ImageView ivDice1, ivDice2, ivDice3, ivDice4, ivDice5;
@@ -62,8 +62,13 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
         initOtherThings();
         db.insertChallenges();
         collChallenges = db.getCollChallenge();
-        getCurrentChallenge();
 
+        try {
+            db.deserializeDataChallenge(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        getCurrentChallenge();
     }
 
     private void getCurrentChallenge() {
@@ -75,6 +80,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
         totalPoints = 0;
         txtViewPoints.setText("current total points: "+totalPoints);
         challengeRounds = currChallenge.getRounds();
+        txtViewTotalPoints.setText("your total Challenge-Points: "+db.getTotalChallengePoints());
     }
 
 
@@ -142,14 +148,25 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                     btn3rdDicing.setEnabled(true);
                     db.openDice();
                     setPaddings();
+                    if(cntGame == challengeRounds){
 
-                    if(resetListView){
+                        db.deserializeDataChallenge(this);
+                        int currentTotalPoints = db.getTotalChallengePoints();
+
+                        if(totalPoints >= currChallenge.getPoints()){
+                            currentTotalPoints += currChallenge.getPoints();
+                            db.setTotalChallengePoints(currentTotalPoints);
+                            db.serializeDataChallenge(this);
+                        }
+                        getCurrentChallenge();
                         adapterChallengeGame.clear();
+                        cntGame = 1;
                         Game.resetNumberGame();
+
                     }
 
-                    toast = Toast.makeText(this, "new game started => do 1st dicing!", Toast.LENGTH_LONG);
-                    toast.show();
+                    //toast = Toast.makeText(this, "new game started => do 1st dicing!", Toast.LENGTH_LONG);
+                    //toast.show();
                     break;
 
                 case R.id.button1stdicing:
@@ -184,24 +201,6 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         redrawPoints();
                         cntGame++;
 
-                        if(cntGame == challengeRounds){
-                            //check ob challenge bestanden wurde
-                            //wenn ja dann die punkte in ein file dazu schreiben - davor file lesen und die vorherigen punkte bekommen
-                            //soll wieder ein random game gefunden werden
-                            int points = 0;
-                            ResultActivity.resetPoints();
-                            for(Game tempGame : collGames){
-                                points += tempGame.getPoints();
-                            }
-                            GameSet gameSet = new GameSet(points);
-                            db.addGameSet(gameSet);
-                            collGames.clear();
-                            resetListView = true;
-                            cntGame = 0;
-                        }
-                        else{
-                            resetListView = false;
-                        }
                     }
                     else{
                         // = Toast.makeText(this, "error: first or second dicing not done", Toast.LENGTH_LONG);

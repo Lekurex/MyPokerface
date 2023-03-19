@@ -20,11 +20,13 @@ public class Database {
 
     private static int MAX_DICES = 5;
     private static final String FILENAME = "dice.ser";
+    private static final String FILENAMECHALLENGE = "challenge.ser";
     private static int cnt = 0;
     private static Database db = null;
     private ArrayList<Dice> collDices = new ArrayList<>();
     private ArrayList<Game> collGames = new ArrayList<>();
     private ArrayList<Challenge> collChallenge = new ArrayList<>();
+    private int totalChallengePoints = 0;
 
 
     private Game currGame;
@@ -152,6 +154,31 @@ public class Database {
         fis.close();
     }
 
+    public void deserializeDataChallenge(Context context) throws Exception{
+        FileInputStream fis = context.openFileInput(FILENAMECHALLENGE);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        totalChallengePoints = (int) ois.readObject();
+        ois.close();
+        fis.close();
+    }
+
+    public void serializeDataChallenge(Context context) throws Exception {
+        FileOutputStream fos = context.openFileOutput(FILENAMECHALLENGE, Context.MODE_PRIVATE);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(totalChallengePoints);
+        oos.flush();
+        oos.close();
+        fos.close();
+    }
+
+    public int getTotalChallengePoints () {
+        return totalChallengePoints;
+    }
+
+    public void setTotalChallengePoints (int totalChallengePoints) {
+        this.totalChallengePoints = totalChallengePoints;
+    }
+
     public void insertChallenges () {
         collChallenge.add(new Challenge(3, 20, "score 20 points in 3 games","easy"));
         collChallenge.add(new Challenge(3, 30, "score 30 points in 3 games","middle"));
@@ -160,10 +187,10 @@ public class Database {
         collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle"));
         collChallenge.add(new Challenge(2, 35, "score 35 points in 2 games","hard"));
         collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy"));
-        collChallenge.add(new Challenge(2, 25, "score 20 points in 3 games","middle"));
-        collChallenge.add(new Challenge(1, 20, "score 20 points in 3 games","hard"));
-        collChallenge.add(new Challenge(5, 80, "score 60 points in 3 games","super hard"));
-        collChallenge.add(new Challenge(6, 100, "score 20 points in 3 games","super hard"));
+        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle"));
+        collChallenge.add(new Challenge(1, 20, "score 20 points in 1 games","hard"));
+        collChallenge.add(new Challenge(5, 80, "score 80 points in 5 games","super hard"));
+        collChallenge.add(new Challenge(6, 100, "score 100 points in 6 games","super hard"));
     }
 
     public ArrayList<Challenge> getCollChallenge () {
