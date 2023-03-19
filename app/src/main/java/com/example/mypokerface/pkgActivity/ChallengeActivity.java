@@ -160,7 +160,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         }
                         getCurrentChallenge();
                         adapterChallengeGame.clear();
-                        cntGame = 0;
+                        cntGame = 1;
                         Game.resetNumberGame();
 
                     }
