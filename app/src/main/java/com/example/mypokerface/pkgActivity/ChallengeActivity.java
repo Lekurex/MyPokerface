@@ -50,6 +50,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
 
     private static int cntGame = 0;
     private boolean resetListView = false;
+    private int currentTotalPoints = 0;
 
     private ImageView ivDice1, ivDice2, ivDice3, ivDice4, ivDice5;
 
@@ -62,7 +63,6 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
         initOtherThings();
         db.insertChallenges();
         collChallenges = db.getCollChallenge();
-
         try {
             db.deserializeDataChallenge(this);
         } catch (Exception e) {
@@ -151,8 +151,13 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                     cntGame++;
                     if(cntGame == challengeRounds){
 
-                        db.deserializeDataChallenge(this);
-                        int currentTotalPoints = db.getTotalChallengePoints();
+                        try {
+                            db.deserializeDataChallenge(this);
+                            currentTotalPoints = db.getTotalChallengePoints();
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         if(totalPoints >= currChallenge.getPoints()){
                             currentTotalPoints += currChallenge.getChallengePoints();
