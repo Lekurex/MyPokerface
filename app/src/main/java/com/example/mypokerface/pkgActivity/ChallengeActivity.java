@@ -148,19 +148,20 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                     btn3rdDicing.setEnabled(true);
                     db.openDice();
                     setPaddings();
+                    cntGame++;
                     if(cntGame == challengeRounds){
 
                         db.deserializeDataChallenge(this);
                         int currentTotalPoints = db.getTotalChallengePoints();
 
                         if(totalPoints >= currChallenge.getPoints()){
-                            currentTotalPoints += currChallenge.getPoints();
+                            currentTotalPoints += currChallenge.getChallengePoints();
                             db.setTotalChallengePoints(currentTotalPoints);
                             db.serializeDataChallenge(this);
                         }
                         getCurrentChallenge();
                         adapterChallengeGame.clear();
-                        cntGame = 1;
+                        cntGame = 0;
                         Game.resetNumberGame();
 
                     }
@@ -199,7 +200,7 @@ public class ChallengeActivity extends AppCompatActivity implements View.OnClick
                         adapterChallengeGame.add(game.toString());
                         totalPoints += game.getPoints();
                         redrawPoints();
-                        cntGame++;
+
 
                     }
                     else{

@@ -180,17 +180,17 @@ public class Database {
     }
 
     public void insertChallenges () {
-        collChallenge.add(new Challenge(3, 20, "score 20 points in 3 games","easy"));
-        collChallenge.add(new Challenge(3, 30, "score 30 points in 3 games","middle"));
-        collChallenge.add(new Challenge(3, 40, "score 40 points in 3 games","hard"));
-        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy"));
-        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle"));
-        collChallenge.add(new Challenge(2, 35, "score 35 points in 2 games","hard"));
-        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy"));
-        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle"));
-        collChallenge.add(new Challenge(1, 20, "score 20 points in 1 games","hard"));
-        collChallenge.add(new Challenge(5, 80, "score 80 points in 5 games","super hard"));
-        collChallenge.add(new Challenge(6, 100, "score 100 points in 6 games","super hard"));
+        collChallenge.add(new Challenge(3, 20, "score 20 points in 3 games","easy",2));
+        collChallenge.add(new Challenge(3, 30, "score 30 points in 3 games","middle",3));
+        collChallenge.add(new Challenge(3, 40, "score 40 points in 3 games","hard",4));
+        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy",2));
+        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle",3));
+        collChallenge.add(new Challenge(2, 35, "score 35 points in 2 games","hard",4));
+        collChallenge.add(new Challenge(2, 15, "score 15 points in 2 games","easy",2));
+        collChallenge.add(new Challenge(2, 25, "score 25 points in 2 games","middle",3));
+        collChallenge.add(new Challenge(1, 20, "score 20 points in 1 games","hard",4));
+        collChallenge.add(new Challenge(5, 80, "score 80 points in 5 games","super hard",5));
+        collChallenge.add(new Challenge(6, 100, "score 100 points in 6 games","super hard",5));
     }
 
     public ArrayList<Challenge> getCollChallenge () {

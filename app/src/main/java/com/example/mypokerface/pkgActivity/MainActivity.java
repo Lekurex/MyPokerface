@@ -321,16 +321,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try{
             switch(item.getItemId()){
                 case R.id.mitemLoad:
-                  //  Game.resetNumberGame();
-                  // db.deserializeData(this);
-                  //  adapterGames.clear();
-                  //  for(Game game : db.getCollGames()){
-                   //     game.setNumberGame();
-                  //      adapterGames.add(game.toString());
-                  //  }
-
                     db.deserializeData(this);
-
                     Toast.makeText(this, "data loaded", Toast.LENGTH_LONG).show();
                     break;
 

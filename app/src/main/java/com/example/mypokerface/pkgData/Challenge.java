@@ -5,16 +5,18 @@ public class Challenge {
     private int points;
     private String challengInfo;
     private String difficulty;
+    private int challengePoints;
     private static int numberChallenge=0;
 
 
 
-    public Challenge (int rounds, int points, String challengInfo,String difficulty ) {
+    public Challenge (int rounds, int points, String challengInfo,String difficulty, int challengePoints) {
         this.rounds = rounds;
         this.points = points;
         this.challengInfo = challengInfo;
         this.numberChallenge = numberChallenge+1;
         this.difficulty = difficulty;
+        this.challengePoints = challengePoints;
         numberChallenge++;
     }
 
@@ -35,5 +37,10 @@ public class Challenge {
         return numberChallenge;
     }
     public String getDifficulty() {return difficulty;}
+
+
+    public int getChallengePoints(){
+        return challengePoints;
+    }
 
 }
